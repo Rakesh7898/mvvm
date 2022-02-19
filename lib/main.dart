@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_example/view/album_page.dart';
 import 'package:flutter_mvvm_example/view_model/album_view_model.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 

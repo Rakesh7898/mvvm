@@ -1,39 +1,16 @@
 import 'dart:ui';
 
-import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_example/view/FavouriteList.dart';
 import 'package:flutter_mvvm_example/view_model/album_view_model.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class AlbumPage extends StatelessWidget {
+class FavouriteList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AlbumViewModel albumViewModel = context.watch<AlbumViewModel>();
     return Scaffold(
-      appBar: AppBar(title: Text("Albums"), actions: [
-        Badge(
-          toAnimate: false,
-          badgeContent: Text(
-            albumViewModel.count.toString(),
-            style: TextStyle(color: Colors.white),
-          ),
-          position: BadgePosition(top: 5, start: 30),
-          elevation: 0,
-          child: IconButton(
-            icon: Icon(
-              Icons.favorite_outline_sharp,
-              size: 28,
-            ),
-            onPressed: () => Get.to(FavouriteList()),
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-      ]),
+      appBar: AppBar(title: Text("Favourite Albums")),
       body: SafeArea(
         child: _buildMainBody(context, albumViewModel),
       ),
@@ -42,23 +19,23 @@ class AlbumPage extends StatelessWidget {
 
   Widget _buildMainBody(context, AlbumViewModel albumViewModel) {
     return FutureBuilder(
-      initialData: albumViewModel.getAlbums(),
+      initialData: albumViewModel.favouriteAlbumsList,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
-              itemCount: albumViewModel.albumList.length,
+              itemCount: albumViewModel.favouriteAlbumsList.length,
               itemBuilder: (context, int index) {
                 return Card(
                   child: ListTile(
                     tileColor: Colors.white,
                     onTap: () async {
                       albumViewModel.selectAlbum(
-                          index, albumViewModel.albumList[index]);
+                          index, albumViewModel.favouriteAlbumsList[index]);
                     },
                     title: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        albumViewModel.albumList[index].title
+                        albumViewModel.favouriteAlbumsList[index].title
                             .toString()
                             .toUpperCase(),
                         style: TextStyle(
@@ -78,7 +55,7 @@ class AlbumPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "${albumViewModel.albumList[index].body}",
+                            "${albumViewModel.favouriteAlbumsList[index].body}",
                             style: TextStyle(
                                 color: (albumViewModel.selectIndex == index)
                                     ? Colors.blue
@@ -86,9 +63,10 @@ class AlbumPage extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () => albumViewModel
-                              .addFavoutite(albumViewModel.albumList[index]),
-                          icon: (albumViewModel.albumList[index].isFavourite ==
+                          onPressed: () => albumViewModel.addFavoutite(
+                              albumViewModel.favouriteAlbumsList[index]),
+                          icon: (albumViewModel
+                                      .favouriteAlbumsList[index].isFavourite ==
                                   true)
                               ? Icon(
                                   Icons.favorite_sharp,

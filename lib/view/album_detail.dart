@@ -28,6 +28,21 @@ class AlbumDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("${albumModel.albumList[index].body}"),
+              ),
+              IconButton(
+                onPressed: () =>
+                    albumModel.addFavoutite(albumModel.albumList[index]),
+                icon: (albumModel.albumList[index].isFavourite == false)
+                    ? Icon(
+                        Icons.favorite_outline_sharp,
+                        color: Colors.grey,
+                        size: 32,
+                      )
+                    : Icon(
+                        Icons.favorite_sharp,
+                        color: Colors.pink,
+                        size: 32,
+                      ),
               )
             ],
           ),
