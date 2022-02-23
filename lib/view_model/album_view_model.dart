@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_example/model/albums.dart';
 import 'package:flutter_mvvm_example/service/api_service.dart';
 import 'package:flutter_mvvm_example/utils/base.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../view/album_detail.dart';
 
 class AlbumViewModel extends ChangeNotifier {
@@ -26,7 +24,7 @@ class AlbumViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  addFavoutite(Albums albumData) {
+  addFavourite(Albums albumData) {
     if (albumData.isFavourite == false) {
       albumData.isFavourite = true;
       favouriteAlbumsList.add(albumData);
@@ -42,10 +40,6 @@ class AlbumViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // Future getOfflineData() async {
-  //   getAlbums();
-  // }
 
   Future getAlbums() async {
     try {

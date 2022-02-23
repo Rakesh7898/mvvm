@@ -87,7 +87,7 @@ class AlbumPage extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () => albumViewModel
-                              .addFavoutite(albumViewModel.albumList[index]),
+                              .addFavourite(albumViewModel.albumList[index]),
                           icon: (albumViewModel.albumList[index].isFavourite ==
                                   true)
                               ? Icon(

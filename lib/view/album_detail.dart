@@ -31,7 +31,7 @@ class AlbumDetails extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () =>
-                    albumModel.addFavoutite(albumModel.albumList[index]),
+                    albumModel.addFavourite(albumModel.albumList[index]),
                 icon: (albumModel.albumList[index].isFavourite == false)
                     ? Icon(
                         Icons.favorite_outline_sharp,
